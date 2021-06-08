@@ -29,8 +29,9 @@ try {
 }
 })
 
-router.put('/:id', md.checkAccountId, md.checkAccountPayload, md.checkAccountNameUnique, (req, res, next) => {
-  // DO YOUR MAGIC
+router.put('/:id', md.checkAccountId, md.checkAccountPayload, async (req, res, next) => {
+  const updated = await Account.updateById(req.params.id, req.body)
+  res.json(updated)
 try {
   res.json('update account by id')
 } catch (err) {
